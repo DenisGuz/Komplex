@@ -1,0 +1,82 @@
+﻿
+@{
+    Layout = "/Views/MasterView.cshtml";
+
+}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Администратор</title>
+    <link rel="stylesheet" type="text/css" href="../Content/css/style.css" />
+    <script language="javascript" type="text/javascript">
+// <!CDATA[
+function btnSubmit_onclick() {
+// Если что-то забыто, выводим окно сообщения
+var btnpas= document.getElementById("txtPassword").value;
+var btnuser= document.getElementById("txtUserName").value;
+if((btnuser == "") || (btnpas == ""))
+{
+   alert("Вы должны ввести имя пользователя и пароль");
+  
+return false;
+}
+
+return true;
+}
+function GetTheDate() { return Date() }
+// ]]>
+    </script>
+    <style type="text/css">
+        .style1 {
+            font-style: italic;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body bgcolor="#0066ff">
+
+    <div class="bg_navigation">
+        <div class="navigation_wrapper">
+            <div id="navigation">
+                <span>Home</span>
+                <ul>
+                    <li><a href="@Url.Action("Index","Home")">Компплектующие</a></li>
+                    <li class="current"><a href="#">Страница администратора</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <center>
+        <br />
+        <h1>Вход в систему</h1> <br />
+        <div class="search_auto">
+        <form name="FirstForm" id="FirstForm">
+            
+            @using (Html.BeginForm("Index", "Admin"))
+            {
+                <p>
+                    <b>Логин:</b>
+                    <input id="txtUserName" name="txtUserName" type="text" />
+                </p>
+                <p>
+                    <b>Пароль:</b>
+                    <input id="txtPassword" name="txtPassword" type="password" />
+                </p>
+
+
+                <input class="btn_search" id="btnSubmit" name="btnSubmit"
+                       type="submit" value="Вход" onclick="btnSubmit_onclick()" />
+                <input class="btn_search" name="btnReset" type="reset" value="Отмена" />
+            }
+            <br /><br /><br />
+        </form>
+    </center>
+    <br /><br /><br />
+    <br /><br /><br /><br /><br /><br />
+
+</body>
+</html>
+
+@*@using (Html.BeginForm("Delete", "Admin"))*@

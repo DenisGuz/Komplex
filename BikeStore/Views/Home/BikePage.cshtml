@@ -1,0 +1,82 @@
+﻿
+@model BikeStore.Models.Bikes
+@{
+    Layout = "/Views/MasterView.cshtml";
+}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<body class="page">
+
+    <!--BEGIN CONTENT-->
+    <div id="content">
+        <div class="bg_navigation">
+            <div class="navigation_wrapper">
+                <div id="navigation">
+                    <span>Home</span>
+                    <ul>
+                        <li><a href="@Url.Action("Index","Home")">Главная</a></li>
+                        <li><a href="@Url.Action("Login","Admin")">Кабинет админа</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="content">
+
+            <div class="breadcrumbs">
+                <a href="@Url.Action("Index","Home")">Главная</a>
+                <img src="~/Content/images/marker_2.gif" alt="" />
+                <span>@Model.Name</span>
+            </div>
+            <div class="main_wrapper">
+                <div class="cars_id">
+
+                </div>
+                <h1><strong>@Model.Name</strong> </h1>
+                <div class="car_image_wrapper car_group">
+                    <div class="big_image">
+                       <a href="@Model.Image" class="car_group">
+                            <img src="images/zoom.png" alt="" class="zoom" />
+                            <img src="@Model.Image" alt="" />
+                        </a>
+                    </div>
+
+                </div>
+                <div class="car_characteristics">
+                    <div class="features_table">
+                        <div class="line grey_area">
+                            <div class="left">Наиминование:</div>
+                            <div class="right">@Model.Name</div>
+                        </div>
+                        <div class="line">
+                            <div class="left">Производитель:</div>
+                            <div class="right">@Model.Firm</div>
+                        </div>
+                        <div class="line grey_area">
+                            <div class="left">Год:</div>
+                            <div class="right">@Model.Years</div>
+                        </div>
+
+                        <div class="line">
+                            <div class="left">Описание:</div>
+                            <div class="right"<p>Сокет: @Model.Soket , Тип памяти: @Model.Type , Количество ядер: @Model.Core , Объём памяти: @Model.Value</p></div>
+                        </div>
+
+                    </div>
+                    <div class="wanted_line">
+                        <div class="left"></div>
+                        <div class="right">
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+
+
+                </div>
+                <div class="clear"></div>
+            <br /><br /><br /><br /><br />
+            </div>
+        </div>
+    </div>

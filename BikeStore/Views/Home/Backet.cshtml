@@ -1,0 +1,74 @@
+﻿@model IEnumerable<BikeStore.Models.Bikes>
+@{
+    Layout = "/Views/MasterView.cshtml";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<body class="page">
+
+    <!--BEGIN CONTENT-->
+    <div id="content">
+
+        <div class="bg_navigation">
+            <div class="navigation_wrapper">
+                <div id="navigation">
+                    <span>Home</span>
+                    <ul>
+                        <li><a href="@Url.Action("Index","Home")">Главная</a></li>
+                        <li><a href="@Url.Action("Catalog","Home")">Книги</a></li>
+                        <li><a href="@Url.Action("Login","Admin")">Кабинет админа</a></li>
+                        <li class="current"><a href="#">Корзина</a> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="breadcrumbs">
+                <a href="@Url.Action("Index","Home")">Главная</a>
+                <img src="~/Content/images/marker_2.gif" alt="" />
+                <span>Книги</span>
+            </div>
+            <div class="main_wrapper">
+
+            </div>
+
+            <div class="main_catalog">
+                <ul class="catalog_table">
+
+                    @foreach (var item in Model)
+                    {
+                        <li>
+                            @*<a href="@Url.Action("BikePage","Home", new {item_id=item.Id})">*@
+                            <a href="@Url.Action("BikePage","Home", new {item_id=item.Id})" class="thumb"><img src="@item.Preview" alt="" wight="100" height="100" /></a>
+                            <div class="catalog_desc">
+                                <div class="title_box">
+                                    <h4><a href="@Url.Action("BikePage","Home", new {item_id=item.Id})">@item.Description</a></h4>
+                                    <div class="price">@item.Price $</div>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="grey_area">
+                                    <span>@item.Type</span>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="clear"></div>
+            <center>
+            <div class="search_auto">
+                <input class="btn_search" type="submit" value="Оплатить" />
+            </div>
+                </center>
+            <br /><br /><br /><br />
+        </div>
+
+    </div>
+    <!--EOF CONTENT-->
+
+</body>
+</html>
+

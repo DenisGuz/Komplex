@@ -1,0 +1,62 @@
+﻿@model BikeStore.Models.Bikes
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+<div class="bg_navigation">
+    <div class="navigation_wrapper">
+        <div id="navigation">
+            <span>Home</span>
+            <ul>
+                <li><a href="@Url.Action("Index","Home")">Главная</a></li>
+                <li class="current"><a href="#">Страница администратора</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="panel">
+    <div class="panel-heading">
+   
+        <h2>Редактирование"@Model.Name"</h2>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        <div class="panel-body">
+         @Html.HiddenFor(m => m.Id)
+        @foreach (var bikes in ViewData.ModelMetadata.Properties)
+        {
+            if(bikes.PropertyName != "Id")
+            {
+                <div class="form-group">
+                    <label>@(bikes.DisplayName ?? bikes.PropertyName)</label>
+                    @if (bikes.PropertyName == "Description")
+                    {
+                        @Html.TextArea(bikes.PropertyName, null, new {@class = " form-control" , rows=5 })
+                    }
+                    else
+                    {
+                        @Html.TextBox(bikes.PropertyName, null, new { @class = " form-control"})
+                    }
+
+                    @Html.ValidationMessage(bikes.PropertyName)
+                </div>
+            }
+        }
+
+        </div>
+
+
+            <div class="panel-footer">
+                
+                   <input type="submit" value="Сохранить" class="btn btn-primary"/>
+              
+                    @Html.ActionLink("Назад", "Index", null, new { @class="bnt bnt-default"})  
+                
+            </div>
+    }
+      
+</div>

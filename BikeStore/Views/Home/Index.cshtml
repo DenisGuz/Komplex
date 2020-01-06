@@ -1,0 +1,129 @@
+﻿@model   IEnumerable<BikeStore.Models.Bikes>
+@{ 
+    Layout = "/Views/MasterView.cshtml";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<body class="page">
+
+    <!--BEGIN CONTENT-->
+    <div id="content">
+        <div class="bg_navigation">
+            <div class="navigation_wrapper">
+                <div id="navigation">
+                    <span>Home</span>
+                    <ul>
+                        <li class="current"><a href="#">Главная</a></li>
+                        <li><a href="@Url.Action("Login","Admin")">Кабинет админа</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="content">
+            <div class="recent">
+                <h2><a href="@Url.Action("Mat","Home")"><strong>Материнские платы</strong></a></h2>
+                <div class="recent_carousel">
+                    
+                    <div class="slide">
+                            <a href="@Url.Action("BikePage","Home", new {item_id=1})">
+                                <img src="~/Content/images/kmp/kmp/msi970fxa.jpg" alt="" />
+                                <div class="description">MSI <br />Год выхода: 2015r<br />Тип памяти: DDR3, Сокет AM3+</div>
+                                <div class="title">MSI 970FXA</span></div>
+                            </a>
+                        </div>
+                        <div class="slide">
+                            <a href="@Url.Action("BikePage","Home", new {item_id=5})">
+                                <img src="~/Content/images/kmp/kmp/gig990x.jpg" alt="" />
+                                 <div class="description">Gigabyte <br />Год выхода: 2015r<br />Тип памяти: DDR3, Сокет AM3+</div>
+                                <div class="title">Gigabyte GA-990X</span></div>
+                            </a>
+                        </div>
+                        <div class="slide">
+                            <a href="@Url.Action("BikePage","Home", new {item_id=9})">
+                                <img src="~/Content/images/kmp/kmp/asus970.jpg" alt="" />
+                                 <div class="description">ASUS <br />Год выхода: 2015r<br />Тип памяти: DDR3, Сокет AM3+</div>
+                                <div class="title">ASUS 970 PRO</span></div>
+                            </a>
+                        </div>
+                </div>
+            </div>
+            <div class="recent">
+                <h2><a href="@Url.Action("Oper","Home")"><strong>Оперативная память</strong></a></h2>
+                <div class="recent_carousel">
+                    <div class="slide">
+                        <a href="@Url.Action("BikePage","Home", new {item_id=13})">
+                            <img src="~/Content/images/kmp/kmp/king4ddr3.jpg" alt="" />
+                                 <div class="description">Kingston <br />Год выхода: 2015r<br />Тип памяти: DDR3</div>
+                                <div class="title">Kingston 4GB DDR3</span></div>
+                        </a>
+                    </div>
+                    <div class="slide">
+                        <a href="@Url.Action("BikePage","Home", new {item_id=26})">
+                            <img src="~/Content/images/kmp/kmp/crucial4ddr3.jpg" alt="" />
+                                 <div class="description">Crucial <br />Год выхода: 2015r<br />Тип памяти: DDR3</div>
+                                <div class="title">Crusial 4GB DDR3</span></div>
+                        </a>
+                    </div>
+                    <div class="slide">
+                        <a href="@Url.Action("BikePage","Home", new {item_id=33})">
+                            <img src="~/Content/images/kmp/kmp/hyperx4ddr3.jpg" alt="" />
+                                 <div class="description">HyperX <br />Год выхода: 2015r<br />Тип памяти: DDR3</div>
+                                <div class="title">HyperX 4GB DDR3</span></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="recent">
+                <h2><a href="@Url.Action("Procesor","Home")"><strong>Процессоры</strong></a></h2>
+                <div class="recent_carousel">
+                    <div class="slide">
+                        <a href="@Url.Action("BikePage","Home", new {item_id=37})">
+                            <img src="~/Content/images/kmp/kmp/intel.jpg" alt="" />
+                                 <div class="description">Intel Core <br />Год выхода: 2015r<br />Количество ядер:4; Сокет:LGA1151</div>
+                                <div class="title">Intel Core i5-7700k </span></div>
+                        </a>
+                    </div>
+
+                    <div class="slide">
+                        <a href="@Url.Action("BikePage","Home", new {item_id=40})">
+                            <img src="~/Content/images/kmp/kmp/amd.jpg" alt="" />
+                                 <div class="description">AMD <br />Год выхода: 2015r<br />Количество ядер:4; Сокет:AM4</div>
+                                <div class="title">AMD Ryzen 5 2500x </span></div>
+                        </a>
+                    </div>
+               
+                    <div class="slide">
+                        <a href="@Url.Action("BikePage","Home", new {item_id=43})">
+                            <img src="~/Content/images/kmp/kmp/amd1.jpg" alt="" />
+                                 <div class="description">AMD <br />Год выхода: 2015r<br />Количество ядер:6; Сокет:AM3+</div>
+                                <div class="title">AMD FX-6300 </span></div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+           <div class="recent">
+                <h2><strong>Последние</strong> объявления</h2>
+                <div class="recent_carousel">
+
+                    @foreach (var item in Model)
+                    {
+                        <div class="slide">
+                            <a href="@Url.Action("BikePage","Home", new {item_id=item.Id})">
+                                <img src="@item.Image" alt="@item.Image" />
+                                <div class="description">@item.Firm<br />Год выпуска: @item.Years<br /></div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div> 
+        </div>
+    </div>
+    <!--EOF CONTENT-->
+   
+</body>
+</html>

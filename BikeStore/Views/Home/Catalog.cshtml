@@ -1,0 +1,128 @@
+﻿@model IEnumerable<BikeStore.Models.Bikes>
+@{
+    Layout = "/Views/MasterView.cshtml";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<body class="page">
+
+    <!--BEGIN CONTENT-->
+    <div id="content">
+
+        <div class="bg_navigation">
+            <div class="navigation_wrapper">
+                <div id="navigation">
+                    <span>Home</span>
+                    <ul>
+                        <li><a href="@Url.Action("Index","Home")">Главная</a></li>
+                        <li class="current"><a href="#">Книги</a> </li>
+                        <li><a href="@Url.Action("Login","Admin")">Кабинет админа</a></li>
+                        <li><a href="@Url.Action("Index","Cart")">Корзина</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="breadcrumbs">
+                <a href="@Url.Action("Index","Home")">Главная</a>
+                <img src="~/Content/images/marker_2.gif" alt="" />
+                <span>Книги</span>
+            </div>
+            <div class="main_wrapper">
+
+                <h1><strong>Все книги в нашей библиотеке</strong> </h1>
+                <div class="catalog_sidebar">
+                    <div class="search_auto">
+                        <h3><strong>Фильтры поиска</strong></h3>
+                        <div class="clear"></div>
+                        <form action="@Url.Action("Catalog","Home")" method="post">
+                            <label><strong>Издатель:</strong></label>
+                            <div class="select_box_1">
+                                <select class="select_1" name="Manufacturer">
+                                    <option value="">Выберите издателя:</option>
+                                    <option value="Like Book">Like Book</option>
+                                    <option value="Nigma">Nigma</option>
+                                    <option value="Eksmo">Eksmo</option>
+                                </select>
+                                <div class="clear"></div>
+                            </div>
+
+                            <label><strong>Писатель:</strong></label>
+                            <div class="select_box_1">
+                                <select class="select_1" name="Type">
+                                    <option value="">Выберите писателя:</option>
+                                    <option value="Ник Перумов">Ник Перумов</option>
+                                    <option value="Терри Пратчетт">Терри Пратчетт</option>
+                                    <option value="Рэй Брэдбери">Рэй Брэдбери</option>
+                                    <option value="Н. В. Гоголь">Н. В. Гоголь</option>
+                                </select>
+                                <div class="clear"></div>
+                            </div>
+
+
+                            <label><strong>Год выпуска:</strong></label>
+                            <div class="select_box_1">
+                                <select class="select_1" name="Year">
+                                    <option value="">Выберите год</option>
+                                    <option value="1950">1950</option>
+                                    <option value="1960">1960</option>
+                                    <option value="1970">1970</option>
+                                    <option value="1980">1980</option>
+                                    <option value="1990">1990</option>
+                                </select>
+
+                                <div class="clear"></div>
+                            </div>
+                            <label><strong>Цена:</strong></label>
+                            <div class="select_box_1">
+
+                                <select class="select_1" name="Price">
+                                    <option value="">Выберите цену</option>
+                                    <option value="5">5$</option>
+                                    <option value="10">10$</option>
+                                    <option value="15">15$</option>
+                                    <option value="20">20$</option>
+                                    <option value="25">25$</option>
+                                </select>
+                                <div class="clear"></div>
+                            </div>                          
+                            <input type="submit" value="Search" class="btn_search" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main_catalog">
+                <ul class="catalog_table">
+
+                    @foreach (var item in Model)
+                    {
+                        <li>
+                            @*<a href="@Url.Action("BikePage","Home", new {item_id=item.Id})">*@
+                            <a href="@Url.Action("BikePage","Home", new {item_id=item.Id})" class="thumb"><img src="@item.Preview" alt="" wight="100" height="100" /></a>
+                            <div class="catalog_desc">
+                                <div class="title_box">
+                                    <h4><a href="@Url.Action("BikePage","Home", new {item_id=item.Id})">@item.Description</a></h4>
+                                    <div class="price">@item.Price $</div>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="grey_area">
+                                    <span>@item.Type</span>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    </div>
+    <!--EOF CONTENT-->
+
+</body>
+</html>
+

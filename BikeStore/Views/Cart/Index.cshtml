@@ -1,0 +1,82 @@
+﻿@model  BikeStore.Models.CartIndexViewModel
+@{
+    ViewBag.Title = "Index";
+    //   Layout = "~/Views/MasterView.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+
+}
+
+
+<div id="content">
+        <div class="bg_navigation">
+            <div class="navigation_wrapper">
+                <div id="navigation">
+                    <span>Home</span>
+                    <ul>
+                        <li><a href="@Url.Action("Index","Home")">Главная</a></li>
+                        <li><a href="@Url.Action("Login","Admin")">Кабинет админа</a></li>
+                        <li class="current"><a href="#">Корзина</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <h2>Ваша корзина</h2>
+            <table class="table">
+
+                <thead>
+                    <tr>
+                        <th>Книга</th>
+                        <th class="text-right">Цена</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var line in Model.Cart.Lines)
+            {
+                        <tr>
+                            <td class="text-center">
+
+                                <div class="main_catalog">
+                                    <ul class="catalog_table">
+
+                                        <li>
+                                            @*<a href="@Url.Action("BikePage","Home", new {item_id=item.Id})">*@
+                                            <a href="@Url.Action("BikePage","Home", new {item_id=line.Product.Id})" class="thumb"><img src="@line.Product.Preview" alt="" wight="100" height="100" /></a>
+                                            <div class="catalog_desc">
+                                                <div class="title_box">
+                                                    <h4><a href="@Url.Action("BikePage","Home", new {item_id=line.Product.Id})">@line.Product.Description</a></h4>
+                                                    @*<div class="price">@line.Product.Price $</div>*@
+                                                    <h3>@line.Product.Type</h3>
+                                                </div>
+                                                <div class="clear"></div>
+                                                @using (Html.BeginForm("RemoveFromCart", "Cart", new { productId = line.Product.Id }))
+                                                {
+                                                    <input name="Id" type="submit" class="fa fa-close" value="Удалить" />
+                                                }
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="clear"></div>
+
+
+                            </td>
+                            <td class="text-right price">@line.Product.Price</td>
+                            @*<td class="text-right">
+                                   @((line.Quantity * line.Product.Price).ToString("# руб"))
+                                </td>*@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    <center>
+    @using (Html.BeginForm("OrderView", "Cart", new { lines = Model.Cart.Lines }))
+            {
+        <input name="Id" type="submit" class="button button-add-cart" value="Оплатить" />
+    }
+        </center>
+    <br /><br /><br /><br /><br /><br />
+    </div>

@@ -1,0 +1,122 @@
+﻿@model IEnumerable<BikeStore.Models.Bikes>
+@{
+    Layout = "/Views/MasterView.cshtml";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<body class="page">
+
+    <!--BEGIN CONTENT-->
+    <div id="content">
+
+        <div class="bg_navigation">
+            <div class="navigation_wrapper">
+                <div id="navigation">
+                    <span>Home</span>
+                    <ul>
+                        <li><a href="@Url.Action("Index","Home")">Главная</a></li>
+                        <li class="current"><a href="#">Комплектующие</a> </li>
+                        <li><a href="@Url.Action("Login","Admin")">Кабинет админа</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="breadcrumbs">
+                <a href="@Url.Action("Index","Home")">Главная</a>
+                <img src="~/Content/images/marker_2.gif" alt="" />
+                <span>Комплектующие</span>
+            </div>
+            <div class="main_wrapper">
+
+                <h1><strong>Все комплектующие в Нашей базе</strong> </h1>
+                <div class="catalog_sidebar">
+                    <div class="search_auto">
+                        <h3><strong>Фильтры поиска</strong></h3>
+                        <div class="clear"></div>
+                        <form action="@Url.Action("Procesor","Home")" method="post">
+                          
+                              <label><strong>Издатель:</strong></label>
+                            <div class="select_box_1">
+                                <select class="select_1" name="Firm">
+                                    <option value="">Выберите фирмы:</option>
+                                    <option value="Intel">Intel</option>
+                                    <option value="AMD">AMD</option>
+                                </select>
+                                <div class="clear"></div>
+                            </div>
+
+                            <label><strong>Сокет:</strong></label>
+                            <div class="select_box_1">
+                                <select class="select_1" name="Soket">
+                                    <option value="">Выберите сокет:</option>
+                                    <option value="AM4">AM4</option>
+                                    <option value="AM3+">AM3+</option>
+                                    <option value="LGA1511">LGA1511</option>
+                                </select>
+                                <div class="clear"></div>
+                            </div>
+                            
+                            <label><strong>Ядра:</strong></label>
+                            <div class="select_box_1">
+                                <select class="select_1" name="Core">
+                                    <option value="">Выберите кол-во ядер</option>
+                                    <option value="4">4 ядра</option>
+                                    <option value="6">6 ядер</option>
+                                    <option value="8">8 ядер</option>
+                                </select>
+                                <div class="clear"></div>
+                            </div>
+
+                            <label><strong>Год выхода в продажу:</strong></label>
+                            <div class="select_box_1">
+                                <select class="select_1" name="Years">
+                                    <option value="">Выберите год:</option>
+                                    <option value="2015">2015</option>
+                                    <option value="2016">2016</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2018">2018</option>
+                                </select>
+                                <div class="clear"></div>
+                            </div>  
+
+                            <input type="submit" value="Search" class="btn_search" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main_catalog">
+                <ul class="catalog_table">
+
+                    @foreach (var item in Model)
+                    {
+                        <li>
+                            @*<a href="@Url.Action("BikePage","Home", new {item_id=item.Id})">*@
+                            <a href="@Url.Action("BikePage","Home", new {item_id=item.Id})" class="thumb"><img src="@item.Image" alt="" wight="100" height="100" /></a>
+                            <div class="catalog_desc">
+                                <div class="title_box">
+                                    <h4><a href="@Url.Action("BikePage","Home", new {item_id=item.Id})">@item.Name<a></h4>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="grey_area">
+                                    <span>@item.Core ядер</span>
+                                    <span>@item.Soket</span>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    </div>
+    <!--EOF CONTENT-->
+
+</body>
+</html>
+
